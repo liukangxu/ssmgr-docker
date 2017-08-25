@@ -15,13 +15,16 @@ while getopts "m:a:w" OPT; do
     esac
 done
 
+echo -e "\033[32mStarting shadowsocks...\033[0m"
+ss-manager -u -m $SS_METHOD -u --manager-address $SS_MANAGER_ADDRESS &
+
+sleep 1
+
+echo -e "\033[32mStarting ssmgr slave...\033[0m"
+/usr/bin/ssmgr -c /root/.ssmgr/default.yml &
+
 if [ "$SS_MANAGER_WEBGUI" = true ]; then
+    sleep 1
     echo -e "\033[32mStarting ssmgr webgui...\033[0m"
     /usr/bin/ssmgr -c /root/.ssmgr/webgui.yml
-else
-    echo -e "\033[32mStarting shadowsocks...\033[0m"
-    ss-manager -u -m $SS_METHOD -u --manager-address $SS_MANAGER_ADDRESS &
-
-    echo -e "\033[32mStarting ssmgr slave...\033[0m"
-    /usr/bin/ssmgr -c /root/.ssmgr/default.yml
 fi
