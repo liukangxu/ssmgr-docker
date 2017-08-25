@@ -21,7 +21,12 @@ ss-manager -u -m $SS_METHOD -u --manager-address $SS_MANAGER_ADDRESS -s :: &
 sleep 1
 
 echo -e "\033[32mStarting ssmgr slave...\033[0m"
-/usr/bin/ssmgr -c /root/.ssmgr/default.yml &
+
+if [ "$SS_MANAGER_WEBGUI" = true ]; then
+    /usr/bin/ssmgr -c /root/.ssmgr/default.yml &
+else
+    /usr/bin/ssmgr -c /root/.ssmgr/default.yml
+fi
 
 if [ "$SS_MANAGER_WEBGUI" = true ]; then
     sleep 1
