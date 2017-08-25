@@ -16,7 +16,7 @@ while getopts "m:a:w" OPT; do
 done
 
 echo -e "\033[32mStarting shadowsocks...\033[0m"
-ss-manager -u -m $SS_METHOD -u --manager-address $SS_MANAGER_ADDRESS -s :: &
+ss-manager -u -m $SS_METHOD -u --manager-address $SS_MANAGER_ADDRESS -s :: -s 0.0.0.0 &
 
 sleep 1
 
